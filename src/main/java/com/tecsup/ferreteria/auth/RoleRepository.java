@@ -1,4 +1,4 @@
-package com.javawhizz.SpringSecurity.auth;
+package com.tecsup.ferreteria.auth;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

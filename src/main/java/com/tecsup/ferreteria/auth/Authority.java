@@ -1,4 +1,4 @@
-package com.javawhizz.SpringSecurity.auth;
+package com.tecsup.ferreteria.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -27,7 +27,7 @@ public class Authority {
     @JsonIgnore
     private Role role;
 
-    public Authority(String authorityName){
+    public Authority(String authorityName) {
         this.authorityName = authorityName;
     }
 }

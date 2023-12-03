@@ -1,6 +1,7 @@
-package com.javawhizz.SpringSecurity.customer;
+package com.tecsup.ferreteria.customer;
 
-import com.javawhizz.SpringSecurity.security.UserAccount;
+import com.tecsup.ferreteria.security.UserAccount;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,10 +31,6 @@ public class Customer {
     @Transient
     private String password;
 
-    @OneToOne(
-            mappedBy = "customer",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserAccount userAccount;
 }

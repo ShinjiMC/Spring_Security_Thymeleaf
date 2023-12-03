@@ -1,4 +1,4 @@
-package com.javawhizz.SpringSecurity.customer;
+package com.tecsup.ferreteria.customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

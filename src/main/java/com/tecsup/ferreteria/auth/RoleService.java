@@ -1,4 +1,4 @@
-package com.javawhizz.SpringSecurity.auth;
+package com.tecsup.ferreteria.auth;
 
 public interface RoleService {
     Role getRoleUSER();

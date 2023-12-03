@@ -1,6 +1,5 @@
-package com.javawhizz.SpringSecurity.config;
+package com.tecsup.ferreteria.config;
 
-import com.javawhizz.SpringSecurity.security.UserAccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +13,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.tecsup.ferreteria.security.UserAccountService;
+
 @Configuration
 @RequiredArgsConstructor
 @EnableMethodSecurity
@@ -23,7 +24,7 @@ public class SpringSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
-        throws Exception{
+            throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests((httpRequest) -> {
@@ -48,9 +49,8 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider provider =
-                new DaoAuthenticationProvider();
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(userAccountService);
         return provider;
@@ -58,9 +58,8 @@ public class SpringSecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http)
-    throws Exception{
-        AuthenticationManagerBuilder auth =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
+            throws Exception {
+        AuthenticationManagerBuilder auth = http.getSharedObject(AuthenticationManagerBuilder.class);
         auth.authenticationProvider(daoAuthenticationProvider());
         return auth.build();
     }

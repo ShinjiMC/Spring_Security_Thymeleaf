@@ -1,4 +1,4 @@
-package com.javawhizz.SpringSecurity.customer;
+package com.tecsup.ferreteria.customer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,8 +14,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("/register")
-    public String createCustomer(@ModelAttribute("customer")
-                                 Customer customer){
+    public String createCustomer(@ModelAttribute("customer") Customer customer) {
         customerService.createCustomer(customer);
         return "redirect:/profile";
     }

@@ -1,6 +1,5 @@
-package com.javawhizz.SpringSecurity.security;
+package com.tecsup.ferreteria.security;
 
-import com.javawhizz.SpringSecurity.customer.Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.Banner;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tecsup.ferreteria.customer.Customer;
+
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
@@ -18,19 +19,19 @@ public class UserAccountController {
     private final UserAccountRepository userAccountRepository;
 
     @GetMapping
-    public String home(Model model){
+    public String home(Model model) {
         model.addAttribute("customer", new Customer());
         return "register";
     }
 
     @GetMapping("/login")
-    public String signIn(){
+    public String signIn() {
         return "login";
     }
 
     @PreAuthorize("hasAuthority('customer:read')")
     @GetMapping("/profile")
-    public String userProfile(Authentication authentication, Model model){
+    public String userProfile(Authentication authentication, Model model) {
         UserAccount userAccount = userAccountRepository
                 .findUserAccountByUsername(authentication.getName())
                 .stream()

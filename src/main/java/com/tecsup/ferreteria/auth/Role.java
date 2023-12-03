@@ -1,7 +1,8 @@
-package com.javawhizz.SpringSecurity.auth;
+package com.tecsup.ferreteria.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.javawhizz.SpringSecurity.security.UserAccount;
+import com.tecsup.ferreteria.security.UserAccount;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,34 +27,28 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
-    //TODO: we will create this class later
+    // TODO: we will create this class later
 
-    @OneToMany(
-            fetch = FetchType.EAGER,
-            mappedBy = "role",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.REFRESH,
-                    CascadeType.DETACH
-            }
-    )
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "role", cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
     private Set<Authority> authorities = new HashSet<>();
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userAccountId")
     @JsonIgnore
     private UserAccount userAccount;
 
-    public Role(String roleName){
+    public Role(String roleName) {
         this.roleName = roleName;
     }
 
-    public Role addAuthorities(Set<Authority> authorities){
+    public Role addAuthorities(Set<Authority> authorities) {
         for (Authority authority : authorities) {
-            if (authority != null){
+            if (authority != null) {
                 this.authorities.add(authority);
                 authority.setRole(this);
             }
@@ -61,14 +56,13 @@ public class Role {
         return this;
     }
 
-    public Set<SimpleGrantedAuthority> getGrantedAuthorities(){
+    public Set<SimpleGrantedAuthority> getGrantedAuthorities() {
         Set<SimpleGrantedAuthority> grantedAuthorities = this.authorities
                 .stream()
-                .map(authority ->
-                        new SimpleGrantedAuthority(authority.getAuthorityName()))
+                .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
                 .collect(Collectors.toSet());
         grantedAuthorities.add(
-                new SimpleGrantedAuthority("ROLE_"+this.roleName));
+                new SimpleGrantedAuthority("ROLE_" + this.roleName));
         return grantedAuthorities;
     }
 }

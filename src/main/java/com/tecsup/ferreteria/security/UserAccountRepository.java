@@ -1,4 +1,4 @@
-package com.javawhizz.SpringSecurity.security;
+package com.tecsup.ferreteria.security;
 
 import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;

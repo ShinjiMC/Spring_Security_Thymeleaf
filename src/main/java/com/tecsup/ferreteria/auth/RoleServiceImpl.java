@@ -1,4 +1,4 @@
-package com.javawhizz.SpringSecurity.auth;
+package com.tecsup.ferreteria.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
     @Override
@@ -16,10 +16,9 @@ public class RoleServiceImpl implements RoleService{
         Role role = new Role("USER")
                 .addAuthorities(Set.of(
                         new Authority("customer:read"),
-                        new Authority("customer:write")
-                ));
+                        new Authority("customer:write")));
         Optional<Role> theRole = roleRepository.findRoleByRoleName(role.getRoleName());
-        if (theRole.isEmpty()){
+        if (theRole.isEmpty()) {
             return roleRepository.save(role);
         }
         return theRole.stream()

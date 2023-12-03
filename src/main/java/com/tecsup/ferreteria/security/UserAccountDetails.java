@@ -1,10 +1,11 @@
-package com.javawhizz.SpringSecurity.security;
+package com.tecsup.ferreteria.security;
 
-import com.javawhizz.SpringSecurity.auth.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.tecsup.ferreteria.auth.Role;
 
 import java.util.Collection;
 import java.util.Set;
@@ -20,23 +21,17 @@ public class UserAccountDetails implements UserDetails {
 
     private Set<? extends GrantedAuthority> grantedAuthorities;
 
-    public UserAccountDetails(UserAccount userAccount){
-        this.username =
-                userAccount.getUsername();
-        this.password =
-                userAccount.getPassword();
-        this.isAccountNonExpired =
-                userAccount.isAccountNonExpired();
-        this.isAccountNonLocked =
-                userAccount.isAccountNonLocked();
-        this.isCredentialsNonExpired =
-                userAccount.isCredentialsNonExpired();
-        this.isEnabled =
-                userAccount.isEnabled();
+    public UserAccountDetails(UserAccount userAccount) {
+        this.username = userAccount.getUsername();
+        this.password = userAccount.getPassword();
+        this.isAccountNonExpired = userAccount.isAccountNonExpired();
+        this.isAccountNonLocked = userAccount.isAccountNonLocked();
+        this.isCredentialsNonExpired = userAccount.isCredentialsNonExpired();
+        this.isEnabled = userAccount.isEnabled();
         this.grantedAuthorities = grantedAuthorities(userAccount);
     }
 
-    private Set<SimpleGrantedAuthority> grantedAuthorities(UserAccount userAccount){
+    private Set<SimpleGrantedAuthority> grantedAuthorities(UserAccount userAccount) {
         return userAccount
                 .getRoles()
                 .stream()
@@ -44,6 +39,7 @@ public class UserAccountDetails implements UserDetails {
                 .flatMap(Set::stream)
                 .collect(Collectors.toSet());
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return grantedAuthorities;
