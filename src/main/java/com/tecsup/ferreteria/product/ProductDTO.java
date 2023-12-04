@@ -15,5 +15,14 @@ public class ProductDTO {
     private String name;
     private Double price;
     private Integer stock;
+    private Integer quantity;
 
+    public ProductDTO(Product product) {
+        if(product == null) return;
+        this.productId = product.getProductId();
+        this.name = product.getName();
+        this.price = product.getPrice();
+        this.stock = product.getStock();
+    }
+    
 }

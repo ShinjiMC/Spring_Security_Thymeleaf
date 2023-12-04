@@ -31,4 +31,11 @@ public class ProductServiceImpl implements ProductService {
         }
         return productRepository.findAll();
     }
+
+    @Override
+    public ProductDTO getProductDTOById(Long productId) {
+        if(productId == null)
+            System.out.println("-----> productId is null");
+        return new ProductDTO(productRepository.findById(productId).orElse(null));
+    }
 }

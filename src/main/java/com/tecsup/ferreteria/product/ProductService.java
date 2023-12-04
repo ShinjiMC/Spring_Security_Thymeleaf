@@ -7,6 +7,8 @@ public interface ProductService {
 
     Product getProductById(Long productId);
 
+    ProductDTO getProductDTOById(Long productId);
+
     void deleteProduct(Long productId);
 
     List<Product> getAllProducts(String keyword);
