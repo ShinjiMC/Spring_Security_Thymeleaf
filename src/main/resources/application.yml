@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://viaduct.proxy.rlwy.net:56020/railway
+    url: jdbc:mysql://roundhouse.proxy.rlwy.net:46774/railway
     username: root
-    password: 1A1B4bb-6-d6b-d4cDD6DbAbaF-CG3ed
+    password: 6E311-ccfdE5h2CfdCChD4eeF3cc1eh1
   jpa:
     hibernate:
       ddl-auto: update
