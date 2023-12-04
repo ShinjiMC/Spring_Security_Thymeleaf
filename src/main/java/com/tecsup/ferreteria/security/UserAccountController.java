@@ -35,14 +35,6 @@ public class UserAccountController {
         return "login";
     }
 
-    @GetMapping("/products")
-    public String viewProducts(Model model, @Param("keyword") String keyword) {
-        List<Product> listaProductos = productService.getAllProducts(keyword);
-        model.addAttribute("listProducts", listaProductos);
-        model.addAttribute("keyword", keyword);
-        return "products";
-    }
-
     @PreAuthorize("hasAuthority('customer:read')")
     @GetMapping("/profile")
     public String userProfile(Authentication authentication, Model model) {
