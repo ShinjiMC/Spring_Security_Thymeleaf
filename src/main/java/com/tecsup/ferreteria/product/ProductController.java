@@ -1,8 +1,6 @@
 package com.tecsup.ferreteria.product;
 
-import java.util.List;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,18 +12,12 @@ import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("products")
+@RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
 
-    @GetMapping("/")
-    public String viewProducts(Model model, @Param("keyword") String keyword) {
-        List<Product> listaProductos = productService.getAllProducts(keyword);
-        model.addAttribute("listProducts", listaProductos);
-        model.addAttribute("keyword", keyword);
-        return "products";
-    }
+    
 
     @GetMapping("/agregateProduct")
     public String agregateProduct(Model model) {

@@ -31,14 +31,14 @@ public class SpringSecurityConfig {
             httpRequest.requestMatchers("/",
                     "register",
                     "/profile**",
-                    "/products**",
+                    // "/products**",
                     "/agregateProduct**",
                     "/newProduct**",
                     "/editProduct**")
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/customers/*")
                     .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/products/*")
+                    .requestMatchers(HttpMethod.POST, "/products/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated();

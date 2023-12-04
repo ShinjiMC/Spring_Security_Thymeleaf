@@ -34,7 +34,7 @@
         >
           <h1>Add Product</h1>
           <form
-            th:object="${productId}"
+            th:object="${product}"
             th:action="@{/products/newProduct}"
             method="post"
           >
@@ -45,7 +45,7 @@
                 class="form-control"
                 id="name"
                 required
-                th:field="*{name}"
+                th:field="*{productId}"
                 readonly="readonly"
                 />
             </div>
