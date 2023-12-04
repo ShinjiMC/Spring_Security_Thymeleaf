@@ -24,4 +24,5 @@ public class ProductController {
     public Product getProductById(Long productId) {
         return productService.getProductById(productId);
     }
+
 }
