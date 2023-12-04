@@ -25,10 +25,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        // if (keyWord != null) {
-        //     return productRepository.findAll(keyWord);
-        // }
+    public List<Product> getAllProducts(String keyWord) {
+        if (keyWord != null) {
+            return productRepository.findAll(keyWord);
+        }
         return productRepository.findAll();
     }
 }

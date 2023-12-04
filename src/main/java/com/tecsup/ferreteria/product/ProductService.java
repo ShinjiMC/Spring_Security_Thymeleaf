@@ -9,5 +9,5 @@ public interface ProductService {
 
     void deleteProduct(Long productId);
 
-    List<Product> getAllProducts();
+    List<Product> getAllProducts(String keyword);
 }
