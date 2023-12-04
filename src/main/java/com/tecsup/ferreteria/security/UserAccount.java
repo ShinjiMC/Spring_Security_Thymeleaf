@@ -60,10 +60,10 @@ public class UserAccount {
         this.isEnabled = true;
     }
 
-    public UserAccount addRoles(Set<Role> roles) {
-        for (Role role : roles) {
+    public UserAccount addRoles(Set<Role> newRoles) {
+        this.roles.addAll(newRoles);
+        for (Role role : newRoles) {
             if (role != null) {
-                this.roles.add(role);
                 role.setUserAccount(this);
             }
         }

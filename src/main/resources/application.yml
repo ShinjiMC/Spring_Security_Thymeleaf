@@ -15,15 +15,14 @@ spring:
     contentnegotiation:
       favor-parameter: true
       media-types.pdf: application/pdf
-  
+
   thymeleaf:
     mode: DEVELOPMENT
     cache: false
 
 media-type:
-      pdf:
-        type: application
-        subtype: pdf
-        parameters:
-          charset: UTF-8
-        
+  pdf:
+    type: application
+    subtype: pdf
+    parameters:
+      charset: UTF-8
