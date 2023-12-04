@@ -44,10 +44,10 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public Role addAuthorities(Set<Authority> authorities) {
-        for (Authority authority : authorities) {
+    public Role addAuthorities(Set<Authority> newAuthorities) {
+        this.authorities.addAll(newAuthorities);
+        for (Authority authority : newAuthorities) {
             if (authority != null) {
-                this.authorities.add(authority);
                 authority.setRole(this);
             }
         }

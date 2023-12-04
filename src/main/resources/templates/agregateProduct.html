@@ -1,45 +1,183 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Add Product</title>
+    <title>Editar Producto</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/profile">Home</a>
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!--
+                Icon when menu is closed.
+    
+                Menu open: "hidden", Menu closed: "block"
+              -->
+              <svg
+                class="block h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <!--
+                Icon when menu is open.
+    
+                Menu open: "block", Menu closed: "hidden"
+              -->
+              <svg
+                class="hidden h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+          >
+            <div class="flex flex-shrink-0 items-center">
+              <img
+                class="h-8 w-auto"
+                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                alt="Your Company"
+              />
+            </div>
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a
+                  href="/profile"
+                  class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                  aria-current="page"
+                  >Dashboard</a
+                >
+                <a
+                  href="/profile"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  >Generar Boleta</a
+                >
+                <a
+                  href="/products"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  >Productos</a
+                >
+                <!-- <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Ventas</a> -->
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          >
+            <a
+              th:href="@{/logout}"
+              class="text-gray-300 bg-red-800 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 mx-2 text-sm font-medium"
+              >Log Out</a
+            >
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/products">Productos</a>
-          </li>
-        </ul>
+            <!-- <p>
+              <span th:text="${customer.getFirstName()}" class="text-white bg-zinc-600 hover:cursor-text text-indigo-950 rounded-md px-3 py-2 mx-2 text-sm font-medium"></span>
+            </p>
+     -->
+            <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <div>
+                <button
+                  type="button"
+                  class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a
+            href="#"
+            class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+            aria-current="page"
+            >Dashboard</a
+          >
+          <a
+            href="/profile"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            >Generar Boleta</a
+          >
+          <!-- <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a> -->
+          <a
+            href="/products"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            >Productos</a
+          >
+        </div>
       </div>
     </nav>
 
     <br />
 
-    <div class="container">
-      <div class="row">
+    <div class="container justify-center">
+      <div class="row mb-8">
         <div
-          class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card"
+          class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card pb-10 bg-slate-400 border-4 border-white"
         >
-          <h1>Add Product</h1>
+          <h1 class="text-center text-xl py-8 font-bold">Agregar Producto</h1>
           <form
             th:object="${product}"
             th:action="@{/products/newProduct}"
             method="post"
+            class="min-[1024px]:px-40 min-[1024px]:mx-20 min-[320px]:px-6 min-[320px]:mx-2"
           >
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
+            <div class="mb-2">
+              <label for="name" class="form-label">Nombre</label>
               <input
                 type="text"
                 class="form-control"
@@ -49,7 +187,7 @@
               />
             </div>
             <div class="mb-3">
-              <label for="price" class="form-label">Price</label>
+              <label for="price" class="form-label">Precio</label>
               <input
                 type="number"
                 class="form-control"
@@ -59,7 +197,7 @@
               />
             </div>
             <div class="mb-3">
-              <label for="category" class="form-label">Category</label>
+              <label for="category" class="form-label">Categoria</label>
               <input
                 type="text"
                 class="form-control"
@@ -79,7 +217,7 @@
               />
             </div>
             <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
+              <label for="description" class="form-label">Descripcion</label>
               <textarea
                 class="form-control"
                 id="description"
@@ -88,7 +226,12 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add Product</button>
+            <button
+              type="submit"
+              class="bg-slate-800 hover:bg-blue-700 text-white font-bold py-2 px-4 border-none border-blue-700 rounded"
+            >
+              Agregar
+            </button>
           </form>
         </div>
       </div>

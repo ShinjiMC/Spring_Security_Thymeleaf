@@ -164,7 +164,32 @@
     <br />
 
     <div class="container text-center">
-      <table class="table">
+      <form class="form-inline" th:action="@{/products}">
+        <div class="form-group mb-2">
+          <label>Filtrar: </label>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <input
+            type="text"
+            name="keyword"
+            class="form-control"
+            id="keyword"
+            th:value="${keyword}"
+            placeholder="What do you want?"
+            required
+          />
+        </div>
+        <input type="submit" class="btn btn-info mb-2" value="Search" />
+        &nbsp;&nbsp;
+        <input
+          type="button"
+          class="btn btn-secondary mb-2 text-slate-800"
+          value="Clean"
+          onclick="limpiarCampos()"
+        />
+      </form>
+      <br />
+      <table class="table" aria-describedby="table-description">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -207,4 +232,9 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"
   ></script>
+  <script type="text/javascript">
+    function limpiarCampos() {
+      window.location.href = "/products";
+    }
+  </script>
 </html>

@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://viaduct.proxy.rlwy.net:56020/railway
+    url: jdbc:mysql://viaduct.proxy.rlwy.net:36681/railway
     username: root
-    password: 1A1B4bb-6-d6b-d4cDD6DbAbaF-CG3ed
+    password: 1BB6aHbbG14bG5b1e5GH6Egg6HHBFa3G
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,15 +15,14 @@ spring:
     contentnegotiation:
       favor-parameter: true
       media-types.pdf: application/pdf
-  
+
   thymeleaf:
     mode: DEVELOPMENT
     cache: false
 
 media-type:
-      pdf:
-        type: application
-        subtype: pdf
-        parameters:
-          charset: UTF-8
-        
+  pdf:
+    type: application
+    subtype: pdf
+    parameters:
+      charset: UTF-8
