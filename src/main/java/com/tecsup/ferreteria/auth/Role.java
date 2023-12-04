@@ -27,8 +27,6 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
-    // TODO: we will create this class later
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "role", cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,

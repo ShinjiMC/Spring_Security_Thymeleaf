@@ -7,7 +7,6 @@ import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 import jakarta.servlet.http.HttpServletRequest;
