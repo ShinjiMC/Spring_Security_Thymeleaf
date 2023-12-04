@@ -12,12 +12,28 @@
 </head>
 
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Productos</a>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/nuevo">Productos</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      <br>
+  
+
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
                 <h1>Add Product</h1>
                 <form th:object="${product}"
-                      th:action="@{/api/v1/products/newProduct}"
+                      th:action="@{/products/newProduct}"
                       method="post">
                     <div class="mb-3">
                         <label for="name"
