@@ -33,5 +33,5 @@ public class Product {
     private String description;
 
     @Column(name = "status")
-    private Boolean status;
+    private Boolean status = true;
 }

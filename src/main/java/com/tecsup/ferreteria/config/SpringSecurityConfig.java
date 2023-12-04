@@ -28,7 +28,10 @@ public class SpringSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests((httpRequest) -> {
-            httpRequest.requestMatchers("/", "register","/profile**")
+            httpRequest.requestMatchers("/", 
+                                    "register",
+                                    "/profile**",
+                                    "/api/v1/products/**")
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/customers/*")
                     .permitAll()

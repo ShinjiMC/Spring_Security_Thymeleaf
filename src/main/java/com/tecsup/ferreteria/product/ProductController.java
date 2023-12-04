@@ -24,4 +24,10 @@ public class ProductController {
     public Product getProductById(Long productId) {
         return productService.getProductById(productId);
     }
+
+    @GetMapping("/agregateProduct")
+    public String agregateProduct() {
+        return "agregateproduct";
+    }
+
 }
