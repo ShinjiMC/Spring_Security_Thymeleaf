@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,10 +36,10 @@ public class UserAccountController {
     }
 
     @GetMapping("/products")
-    public String viewProducts(Model model) {
-        List<Product> listaProductos = productService.getAllProducts();
+    public String viewProducts(Model model, @Param("keyword") String keyword) {
+        List<Product> listaProductos = productService.getAllProducts(keyword);
         model.addAttribute("listProducts", listaProductos);
-        // model.addAttribute("keyword", keyword);
+        model.addAttribute("keyword", keyword);
         return "products";
     }
 
