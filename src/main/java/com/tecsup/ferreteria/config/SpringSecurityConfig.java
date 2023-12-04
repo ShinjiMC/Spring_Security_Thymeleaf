@@ -31,9 +31,11 @@ public class SpringSecurityConfig {
             httpRequest.requestMatchers("/", 
                                     "register",
                                     "/profile**",
-                                    "/api/v1/products/**")
+                                    "/agregateProduct**")
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/customers/*")
+                    .permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/v1/products/*")
                     .permitAll()
                     .anyRequest()
                     .authenticated();

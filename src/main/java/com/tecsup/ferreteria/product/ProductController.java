@@ -25,9 +25,4 @@ public class ProductController {
         return productService.getProductById(productId);
     }
 
-    @GetMapping("/agregateProduct")
-    public String agregateProduct() {
-        return "agregateproduct";
-    }
-
 }
