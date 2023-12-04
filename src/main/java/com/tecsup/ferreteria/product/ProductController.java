@@ -27,9 +27,15 @@ public class ProductController {
         return "products";
     }
 
+    @GetMapping("/agregateProduct")
+    public String agregateProduct(Model model) {
+        model.addAttribute("product", new Product());
+        return "agregateProduct";
+    }
+
     @PostMapping("/newProduct")
     public String createProduct(@ModelAttribute("product") Product product) {
-        productService.createProduct(product);
+        productService.saveProduct(product);
         return "redirect:/products";
     }
 
