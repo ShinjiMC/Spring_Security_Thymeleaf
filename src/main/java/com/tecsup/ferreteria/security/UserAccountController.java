@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tecsup.ferreteria.customer.Customer;
-import com.tecsup.ferreteria.product.Product;
 
 @Controller
 @RequestMapping("/")
@@ -27,12 +26,6 @@ public class UserAccountController {
     @GetMapping("/login")
     public String signIn() {
         return "login";
-    }
-
-    @GetMapping("/agregateProduct")
-    public String agregateProduct(Model model) {
-        model.addAttribute("product", new Product());
-        return "agregateProduct";
     }
 
     @PreAuthorize("hasAuthority('customer:read')")
