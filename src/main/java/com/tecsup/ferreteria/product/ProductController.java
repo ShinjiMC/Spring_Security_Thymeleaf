@@ -75,17 +75,11 @@ public class ProductController {
     @PostMapping("/generarBoleta")
     public String generarBoleta(@RequestParam Map<String, String> params, Model model) {
         List<ProductDTO> selectedProducts = new ArrayList<>();
-        // Itera sobre los parámetros del formulario para identificar los productos
-        // seleccionados
         for (Map.Entry<String, String> entry : params.entrySet()) {
-
             Long productId = Long.parseLong(entry.getKey());
-
             int quantity = (entry.getValue() == "") ? 0 : Integer.parseInt(entry.getValue());
-
             if (quantity != 0) {
                 ProductDTO product = productService.getProductDTOById(productId);
-
                 if (product != null && quantity <= product.getStock()) {
                     product.setQuantity(quantity);
                     selectedProducts.add(product);
@@ -93,12 +87,9 @@ public class ProductController {
             }
 
         }
-
         Double precioTotal = selectedProducts.stream().mapToDouble(p -> p.getPrice() * p.getQuantity()).sum();
-
         model.addAttribute("selectedProducts", selectedProducts);
         model.addAttribute("precioTotal", precioTotal);
-
         return "descargarBoleta";
     }
 
