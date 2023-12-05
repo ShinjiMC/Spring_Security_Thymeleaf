@@ -48,7 +48,9 @@
               <a href="/profile" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
               <a th:href="@{/products/chooseProducts}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Generar Boleta</a>
               <!-- <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Ventas</a> -->
+              <div th:if="${rol == 'ADMIN'}">
                 <a th:href="@{/products}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Buscar Productos</a>
+              </div>
             </div>
           </div>
         </div>

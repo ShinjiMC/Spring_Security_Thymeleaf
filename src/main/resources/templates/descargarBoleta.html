@@ -72,7 +72,7 @@
               <div class="flex space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a
-                  href="#"
+                  href="/profile"
                   class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                   aria-current="page"
                   >Dashboard</a
@@ -80,13 +80,13 @@
                 <a
                   href="/profile"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >Generar Boleta</a
+                  >Volver a Home</a
                 >
-                <a
+                <!-- <a
                   href="/products/agregateProduct"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >Agregar Producto</a
-                >
+                > -->
                 <!-- <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Ventas</a> -->
               </div>
             </div>
@@ -128,21 +128,21 @@
       <div class="sm:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2">
           <a
-            href="#"
+            href="/profile"
             class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
             aria-current="page"
             >Dashboard</a
           >
           <a
             href="/profile"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >Generar Boleta</a
+            class="text-gray-300 bg-gray-700 hover:bg-gray-500 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            >Volver a Home</a
           >
           <!-- <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a> -->
-          <a
+          <!-- <a
             href="#"
             class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >Productos</a
+            >Productos</a -->
           >
         </div>
       </div>
@@ -151,6 +151,13 @@
     <br />
 
     <div class="container text-center">
+      <div class="my-5">
+        <a
+          th:href="@{/products/chooseProducts}"
+          class="text-gray-300 bg-gray-700 text-white hover:bg-gray-500 hover:text- rounded-md px-3 py-2 text-sm font-medium"
+          >Volver a Escoger Productos</a
+        >
+      </div>
       <div>
         <form
           id="boletaForm"
@@ -195,12 +202,17 @@
             th:name="'quantities'"
             th:value="${product.quantity}"
           />
-          <input
-            id="submit"
-            type="submit"
-            class="btn btn-success"
-            value="Generar Boleta"
-          />
+          <div th:if="${precioTotal.equals(0.0)}">
+            <h3 class="text-danger">Debe seleccionar al menos un producto</h3>
+          </div>
+          <div th:if="${!precioTotal.equals(0.0)}">
+            <input
+              id="submit"
+              type="submit"
+              class="btn btn-success"
+              value="Generar Boleta"
+            />
+          </div>
         </form>
       </div>
     </div>

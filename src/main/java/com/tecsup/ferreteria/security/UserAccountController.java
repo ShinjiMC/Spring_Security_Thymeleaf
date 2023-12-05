@@ -2,6 +2,9 @@ package com.tecsup.ferreteria.security;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tecsup.ferreteria.auth.Role;
 import com.tecsup.ferreteria.customer.Customer;
 
 @Controller
@@ -38,6 +42,13 @@ public class UserAccountController {
                 .findFirst()
                 .orElseThrow(() -> new UsernameNotFoundException("username not found"));
         model.addAttribute("customer", userAccount.getCustomer());
+        Set<Role> roles = userAccount.getRoles();
+        Iterator<Role> iterator = roles.iterator();
+        if (iterator.hasNext()) {
+            Role rol = iterator.next();
+            System.out.println("Rol: " + rol.getRoleName());
+            model.addAttribute("rol",rol.getRoleName());
+        }
         return "profile";
     }
 
