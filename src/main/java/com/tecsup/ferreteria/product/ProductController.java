@@ -1,6 +1,5 @@
 package com.tecsup.ferreteria.product;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
+import com.tecsup.ferreteria.boleta.*;
 
 @Controller
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
+    private final BoletaService boletaService;
     private final ProductService productService;
 
     @GetMapping("/agregateProduct")
@@ -105,24 +106,36 @@ public class ProductController {
     public String generarBoleta(@RequestParam("productIds") List<Long> productIds,
             @RequestParam("quantities") List<Integer> quantities, Model model) {
         Double precioTotal = 0.0;
+        List<ProductoDetalle> detalles = new ArrayList<>();
         for (int i = 0; i < productIds.size(); i++) {
             Long productId = productIds.get(i);
             Integer quantity = quantities.get(i);
             Product product = productService.getProductById(productId);
+
             if (product != null && quantity <= product.getStock() && quantity != null) {
+                ProductoDetalle detalle = new ProductoDetalle();
+                detalle.setNombre(product.getName());
+                detalle.setPrecio(product.getPrice());
+                detalle.setCantidad(quantity);
+                Double productTotalPrice = product.getPrice() * quantity;
+                precioTotal += productTotalPrice;
+                detalles.add(detalle);
+                product.setStock(product.getStock() - quantity);
+                productService.saveProduct(product);
                 System.out.println("Id: " + productId);
                 System.out.println("Name: " + product.getName());
                 System.out.println("Price: " + product.getPrice());
                 System.out.println("Stock: " + product.getStock());
                 System.out.println("Quantity: " + quantity);
-                Double productTotalPrice = product.getPrice() * quantity;
-                precioTotal += productTotalPrice;
                 System.out.println("Product Total Price: " + productTotalPrice);
-                product.setStock(product.getStock() - quantity);
-                productService.saveProduct(product);
             }
         }
+        Boleta boleta = new Boleta();
+        boleta.setDetalles(detalles);
+        boleta.setPrecioTotal(precioTotal);
+        boletaService.saveBoleta(boleta);
         System.out.println("Precio Total: " + precioTotal);
+
         return "redirect:/profile";
     }
 }
