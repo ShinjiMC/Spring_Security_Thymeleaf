@@ -30,6 +30,11 @@
                 required
                 th:field="*{firstName}"
               />
+              <div
+                th:if="${#fields.hasErrors('firstName')}"
+                th:errors="*{firstName}"
+                class="text-danger"
+              ></div>
             </div>
             <div class="mb-3">
               <label for="lastName" class="form-label">Last Name</label>
@@ -40,6 +45,11 @@
                 required
                 th:field="*{lastName}"
               />
+              <div
+                th:if="${#fields.hasErrors('lastName')}"
+                th:errors="*{lastName}"
+                class="text-danger"
+              ></div>
             </div>
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
@@ -50,6 +60,11 @@
                 required
                 th:field="*{email}"
               />
+              <div
+                th:if="${#fields.hasErrors('email')}"
+                th:errors="*{email}"
+                class="text-danger"
+              ></div>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
@@ -60,6 +75,11 @@
                 required
                 th:field="*{password}"
               />
+              <div
+                th:if="${#fields.hasErrors('password')}"
+                th:errors="*{password}"
+                class="text-danger"
+              ></div>
             </div>
             <a href="/login">Login</a>
             <button type="submit" class="btn btn-primary">Signup</button>
