@@ -152,7 +152,13 @@
 
     <div class="container text-center">
       <div>
-        <form method="post" th:action="@{/products/printBoleta}">
+        <form
+          id="boletaForm"
+          method="post"
+          th:action="@{/products/printBoleta}"
+          target="_blank"
+          onsubmit="disableButton()"
+        >
           <table class="table" aria-describedby="table-description">
             <thead>
               <tr>
@@ -189,7 +195,12 @@
             th:name="'quantities'"
             th:value="${product.quantity}"
           />
-          <input type="submit" class="btn btn-success" value="Generar Boleta" />
+          <input
+            id="submit"
+            type="submit"
+            class="btn btn-success"
+            value="Generar Boleta"
+          />
         </form>
       </div>
     </div>
@@ -203,6 +214,9 @@
   <script type="text/javascript">
     function limpiarCampos() {
       window.location.href = "/products";
+    }
+    function disableButton() {
+      document.getElementById("submit").disabled = true;
     }
   </script>
 </html>

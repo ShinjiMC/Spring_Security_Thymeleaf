@@ -103,7 +103,7 @@ public class ProductController {
     }
 
     @PostMapping("/printBoleta")
-    public String generarBoleta(@RequestParam("productIds") List<Long> productIds,
+    public ModelAndView generarBoleta(@RequestParam("productIds") List<Long> productIds,
             @RequestParam("quantities") List<Integer> quantities, Model model) {
         Double precioTotal = 0.0;
         List<ProductoDetalle> detalles = new ArrayList<>();
@@ -122,20 +122,13 @@ public class ProductController {
                 detalles.add(detalle);
                 product.setStock(product.getStock() - quantity);
                 productService.saveProduct(product);
-                System.out.println("Id: " + productId);
-                System.out.println("Name: " + product.getName());
-                System.out.println("Price: " + product.getPrice());
-                System.out.println("Stock: " + product.getStock());
-                System.out.println("Quantity: " + quantity);
-                System.out.println("Product Total Price: " + productTotalPrice);
             }
         }
         Boleta boleta = new Boleta();
         boleta.setDetalles(detalles);
         boleta.setPrecioTotal(precioTotal);
         boletaService.saveBoleta(boleta);
-        System.out.println("Precio Total: " + precioTotal);
 
-        return "redirect:/profile";
+        return new ModelAndView("redirect:/products/generarPDF/" + boleta.getId());
     }
 }
