@@ -26,39 +26,29 @@ public class BoletaController {
 
     @GetMapping("/generarPDF/{boletaId}")
     public ResponseEntity<byte[]> generarPDF(@PathVariable("boletaId") Long boletaId) {
-        // Recupera la boleta usando el ID pasado como parámetro
-        Boleta boleta = boletaService.getBoleta(boletaId); // Implementa este método en tu servicio
-
-        // Verifica si la boleta existe y luego genera el PDF
+        Boleta boleta = boletaService.getBoleta(boletaId);
         if (boleta != null) {
             try {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 PdfWriter writer = new PdfWriter(baos);
                 PdfDocument pdf = new PdfDocument(writer);
                 Document document = new Document(pdf);
-
-                // Agrega detalles de la boleta al PDF
                 document.add(new Paragraph("Boleta ID: " + boleta.getId()));
-                // Agrega la tabla de detalles de boleta al PDF
                 Table table = new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
                 table.addCell("Nombre");
                 table.addCell("Precio");
                 table.addCell("Cantidad");
                 table.addCell("Precio Total");
-
                 for (ProductoDetalle detalle : boleta.getDetalles()) {
                     table.addCell(detalle.getNombre());
                     table.addCell(detalle.getPrecio().toString());
                     table.addCell(detalle.getCantidad().toString());
                     table.addCell(String.valueOf(detalle.getPrecio() * detalle.getCantidad()));
                 }
-
                 document.add(table);
                 document.add(new Paragraph("Precio Total: " + boleta.getPrecioTotal()));
                 document.close();
-
                 byte[] pdfBytes = baos.toByteArray();
-
                 return ResponseEntity.ok()
                         .contentType(MediaType.APPLICATION_PDF)
                         .header("Content-Disposition", "inline; filename=boleta.pdf")
@@ -69,7 +59,6 @@ public class BoletaController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
         } else {
-            // Si no se encuentra la boleta, devuelve un error 404 o un mensaje adecuado
             return ResponseEntity.notFound().build();
         }
     }
