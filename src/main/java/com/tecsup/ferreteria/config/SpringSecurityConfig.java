@@ -25,34 +25,28 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
+        String loginUrl = "/login";
         http.csrf(AbstractHttpConfigurer::disable);
-
-        http.authorizeHttpRequests((httpRequest) -> {
-            httpRequest.requestMatchers("/",
-                    "register",
-                    "/profile**",
-                    // "/products**",
-                    "/agregateProduct**",
-                    "/newProduct**",
-                    "/editProduct**")
-                    .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/v1/customers/*")
-                    .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/products/**")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated();
-        }).formLogin((formLogin) -> {
-            formLogin.loginPage("/login")
-                    .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/profile")
-                    .permitAll();
-        }).logout((logout) -> {
-            logout.logoutUrl("/logout")
-                    .logoutSuccessUrl("/login")
-                    .permitAll();
-        });
-
+        http.authorizeHttpRequests(httpRequest -> httpRequest.requestMatchers("/",
+                "register",
+                "/profile**",
+                "/agregateProduct**",
+                "/newProduct**",
+                "/editProduct**")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/customers/*")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/products/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated())
+                .formLogin(formLogin -> formLogin.loginPage(loginUrl)
+                        .loginProcessingUrl(loginUrl)
+                        .defaultSuccessUrl("/profile")
+                        .permitAll())
+                .logout(logout -> logout.logoutUrl("/logout")
+                        .logoutSuccessUrl(loginUrl)
+                        .permitAll());
         return http.build();
     }
 
