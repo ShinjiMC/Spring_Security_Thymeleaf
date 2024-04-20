@@ -1,19 +1,33 @@
 # Spring_Security_Thymeleaf
 
-El proyecto simula el proceso de Generación de Boletas para una Ferretería. Los usuarios, al iniciar sesión (o crear una cuenta), son asignados a diferentes roles según su posición en la empresa. Los empleados estándar pueden generar boletas al seleccionar los productos con sus respectivas cantidades, lo que culmina en la creación automática de un archivo PDF listo para imprimir.
+By Braulio Maldonado Casilla & Sergio Daniel Mogollon Caceres
 
-Por otro lado, los usuarios con el rol de ADMIN disponen de privilegios adicionales. Tienen acceso al manejo completo de los datos de los productos, lo que incluye operaciones de Crear, Leer, Actualizar y Eliminar (CRUD), permitiendo editar, agregar y eliminar productos de la base de datos de la ferretería.
+The project simulates the process of generating invoices for a hardware store. When users log in (or create an account), they are assigned different roles according to their position in the company. Standard employees can generate invoices by selecting products and their respective quantities, which culminates in the automatic creation of a PDF file ready for printing.
 
-Este sistema ofrece una solución integral que agiliza la generación de boletas para los empleados y facilita la gestión eficiente de los productos para los administradores, optimizando así las operaciones diarias de la ferretería.
+On the other hand, users with the ADMIN role have additional privileges. They have access to the complete management of product data, which includes Create, Read, Update, and Delete (CRUD) operations, allowing them to edit, add, and delete products from the hardware store's database.
 
-## Instalación y Configuración
+This system offers a comprehensive solution that streamlines the generation of invoices for employees and facilitates the efficient management of products for administrators, thus optimizing the hardware store's daily operations.
 
-Para ejecutar el proyecto localmente, necesitarás tener instalado lo siguiente:
+## Accounts
 
-1. **Java Development Kit (JDK)** - Versión 17.
-2. **Maven** - Herramienta de gestión de proyectos Java.
+For standard user access:
 
-El proyecto hace uso de las siguientes herramientas y librerías:
+- Email: user@gmail.com
+- Password: user
+
+For administrative access:
+
+- Email: example@gmail.com
+- Password: admin
+
+## Installation and Configuration
+
+To run the project locally, you will need to have the following installed:
+
+1. **Java Development Kit (JDK)** - Version 17.
+2. **Maven** - Java project management tool.
+
+The project makes use of the following tools and libraries:
 
 - Spring Boot 3.2.0
 - Thymeleaf
@@ -25,9 +39,9 @@ El proyecto hace uso de las siguientes herramientas y librerías:
 - Lombok
 - Spring Boot Starter Validation (Hibernate)
 
-## Configuración de la Base de Datos
+## Database Configuration
 
-En el archivo `application.yml`, encontrarás la configuración de la conexión a la base de datos. Puedes modificar los siguientes campos según tus credenciales y configuración específica de tu base de datos:
+In the `application.yml` file, you will find the database connection configuration. You can modify the following fields according to your credentials and specific database configuration:
 
 ```yaml
 spring:
@@ -37,24 +51,24 @@ spring:
     password: MYSQLPASSWORD
 ```
 
-## Funcionalidades Principales:
+## Main Features
 
-Descripción detallada de las funcionalidades principales del proyecto, incluyendo cómo acceder a ellas y su utilidad.
+Detailed description of the main functionalities of the project, including how to access them and their utility.
 
-## Tecnologías Utilizadas:
+## Technologies Used
 
-### Thymeleaf:
+### Thymeleaf
 
-Se utiliza Thymeleaf en los archivos HTML para la integración de datos en las vistas:
+Thymeleaf is used in HTML files for data integration in views:
 
-Archivo: `login.html`
+File: `login.html`
 
 ```html
-<!-- Enlace a la librería Thymeleaf -->
+<!-- Link to the Thymeleaf library -->
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-  <!-- Uso de Thymeleaf para configurar la acción del formulario -->
+  <!-- Using Thymeleaf to configure the form action -->
   <form class="space-y-4 md:space-y-6" th:action="@{/login}" method="post">
-    <!-- Uso de Thymeleaf para manejar atributos y mostrar datos -->
+    <!-- Using Thymeleaf to handle attributes and display data -->
     <label
       for="username"
       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -85,7 +99,7 @@ Archivo: `login.html`
       type="submit"
       class="w-full text-white bg-primary-600 hover:bg-primary-700 ..."
     >
-      Ingresar
+      Log in
     </button>
   </form>
 </html>
@@ -93,9 +107,9 @@ Archivo: `login.html`
 
 ### Hibernate Validator
 
-Se utiliza Hibernate Validator en las entidades para aplicar restricciones de validación:
+Hibernate Validator is used in entities to apply validation constraints:
 
-Archivo: `Customer.java`
+File: `Customer.java`
 
 ```java
 import jakarta.validation.constraints.Email;
@@ -105,33 +119,33 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "customer")
 public class Customer {
-    // ... otros atributos
+    // ... other attributes
     @Column(name = "email")
-    @NotEmpty(message = "El email no puede estar vacio")
-    @Email(message = "El email debe ser valido")
+    @NotEmpty(message = "The email cannot be empty")
+    @Email(message = "The email must be valid")
     private String email;
-    // ... otros atributos
+    // ... other attributes
 }
 ```
 
 ### Spring Security
 
-Se utiliza Spring Security para configurar la autenticación y la autorización:
-Se configura el archivo para definir las reglas de seguridad. En este fragmento de código, se establecen las directivas de autorización con HTTP, permitiendo el acceso a ciertas rutas como `/`, `register`, `/profile`, entre otras. Además, se especifica el formulario de inicio de sesión en `/login`, el procesamiento de la solicitud de inicio de sesión en la misma URL y la redirección a `/profile` tras un inicio de sesión exitoso. Por último, se habilita la funcionalidad de cierre de sesión en `/logout`, con redirección a la página de inicio de sesión.
+Spring Security is used to configure authentication and authorization:
+The file is configured to define security rules. In this code snippet, authorization directives with HTTP are set up, allowing access to certain routes like `/`, `register`, `/profile`, among others. Additionally, the login form is specified at `/login`, the login request processing at the same URL, and the redirection to `/profile` after a successful login. Finally, the logout functionality is enabled at `/logout`, with redirection to the login page.
 
-Archivo: `SpringSecurityConfig.java`
+File: `SpringSecurityConfig.java`
 
 ```java
 @Configuration
 @EnableMethodSecurity
 public class SpringSecurityConfig {
-    // ... otros métodos y configuraciones
+    // ... other methods and configurations
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Configuración de autorización con HTTP
+        // Authorization configuration with HTTP
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(httpRequest ->
-            // Configuración de rutas y permisos específicos
+            // Configuration of specific routes and permissions
             httpRequest.requestMatchers("/", "register", "/profile**", "/agregateProduct**",
                     "/newProduct**", "/editProduct**")
                     .permitAll()
@@ -147,15 +161,15 @@ public class SpringSecurityConfig {
                     .permitAll());
         return http.build();
     }
-    // ... otros métodos
+    // ... other attributes
 }
 ```
 
 ### Spring Data JPA
 
-Spring Data JPA se utiliza para manejar la persistencia de datos:
+Spring Data JPA is used to handle data persistence.
 
-Archivo: `Boleta.java`
+File: `Boleta.java`
 
 ```java
 @Entity
@@ -171,15 +185,15 @@ public class Boleta {
     @JoinColumn(name = "boleta_id")
     private List<ProductoDetalle> detalles;
     private Double precioTotal;
-    // ... otros atributos
+    // ... other attributes
 }
 ```
 
 ## Spring Boot Starter Web
 
-Spring Boot Starter Web es una dependencia que proporciona características para construir aplicaciones web. Aquí hay un ejemplo de cómo se usa:
+Spring Boot Starter Web is a dependency that provides features for building web applications. Here's an example of how it's used:
 
-Archivo: `CustomerController.java`
+File: `CustomerController.java`
 
 ```java
 import lombok.RequiredArgsConstructor;
@@ -196,15 +210,14 @@ public class CustomerController {
         customerService.createCustomer(customer);
         return "redirect:/profile";
     }
-    // ... otros métodos del controlador
 }
 ```
 
 ## Lombok
 
-Lombok es una biblioteca que reduce la verbosidad del código al generar automáticamente métodos como getters, setters, constructores, etc. Aquí hay un ejemplo de cómo se utiliza:
+Lombok is a library that reduces code verbosity by automatically generating methods like getters, setters, constructors, etc. Here's an example of how it's used:
 
-Archivo: `Customer.java`
+File: `Customer.java`
 
 ```java
 import lombok.AllArgsConstructor;
@@ -232,13 +245,12 @@ public class Customer {
     private String password;
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserAccount userAccount;
-    // ... otros atributos y métodos
 }
 ```
 
-## Estructura del Proyecto:
+## Project Structure
 
-En la estructura del proyecto, cada directorio contiene archivos relacionados con funcionalidades específicas del sistema, como autenticación (`auth`), gestión de boletas (`boleta`), configuración (`config`), clientes (`customer`), productos (`product`), seguridad (`security`), y archivos de recursos HTML para las vistas en templates. Además, el archivo de configuración principal del proyecto se encuentra en application.yml dentro del directorio resources.
+In the project structure, each directory contains files related to specific system functionalities, such as authentication (`auth`), invoice management (`boleta`), configuration (`config`), customers (`customer`), products (`product`), security (`security`), and HTML resource files for views in templates. Additionally, the main project configuration file is located in `application.yml` within the `resources` directory.
 
 - `src/main/java/com/tecsup/ferreteria/`
   - `auth/`
@@ -290,55 +302,55 @@ En la estructura del proyecto, cada directorio contiene archivos relacionados co
     - `register.html`
   - `application.yml`
 
-## Capturas de Pantalla:
+## Screenshots
 
-### Menú de Login
+### Login Menu
 
-[![Menú de Login](https://i.postimg.cc/7L2zy1yb/login.png)](https://postimg.cc/f3Myc9yh)
+[![Login Menu](https://i.postimg.cc/7L2zy1yb/login.png)](https://postimg.cc/f3Myc9yh)
 
-### Menú de Register
+### Register Menu
 
-[![Menú de Register](https://i.postimg.cc/qMvC7HdP/register.png)](https://postimg.cc/3WzwL6N1)
+[![Register Menu](https://i.postimg.cc/qMvC7HdP/register.png)](https://postimg.cc/3WzwL6N1)
 
-### Menú Inicial de USER
+### Initial USER Menu
 
-[![Menú Inicial de USER](https://i.postimg.cc/RhX6TXwp/home.png)](https://postimg.cc/zHHGzwtT)
+[![Initial USER Menu](https://i.postimg.cc/RhX6TXwp/home.png)](https://postimg.cc/zHHGzwtT)
 
-### Menú Inicial buscando Producto
+### Initial Menu Searching for Product
 
-[![Menú Inicial buscando Producto](https://i.postimg.cc/0j8KmLKJ/home-buscando.png)](https://postimg.cc/zbcfY2jJ)
+[![Initial Menu Searching for Product](https://i.postimg.cc/0j8KmLKJ/home-buscando.png)](https://postimg.cc/zbcfY2jJ)
 
-### Menú para Escoger los productos a Comprar
+### Menu for Choosing Products to Buy
 
-[![Menú para Escoger los productos a Comprar](https://i.postimg.cc/PxnwfLty/choose-Product.png)](https://postimg.cc/GBz2qmTT)
+[![Menu for Choosing Products to Buy](https://i.postimg.cc/PxnwfLty/choose-Product.png)](https://postimg.cc/GBz2qmTT)
 
-### Menú para Confirmar Venta y Generar Boleta
+### Menu to Confirm Sale and Generate Invoice
 
-[![Menú para Confirmar Venta y Generar Boleta](https://i.postimg.cc/DwDGDjHt/descargando-Boleta.png)](https://postimg.cc/3kXW0BKB)
+[![Menu to Confirm Sale and Generate Invoice](https://i.postimg.cc/DwDGDjHt/descargando-Boleta.png)](https://postimg.cc/3kXW0BKB)
 
-### PDF Resultante de Boleta
+### Resulting Invoice PDF
 
-[![PDF Resultante de Boleta](https://i.postimg.cc/xT6MGTRj/boleta-PDF.png)](https://postimg.cc/gn6xmpQ1)
+[![Resulting Invoice PDF](https://i.postimg.cc/xT6MGTRj/boleta-PDF.png)](https://postimg.cc/gn6xmpQ1)
 
-### Menú Inicial de ADMIN
+### Initial ADMIN Menu
 
-[![Menú Inicial de ADMIN](https://i.postimg.cc/qRcCNkqT/home-ADMIN.png)](https://postimg.cc/JDnhgCj6)
+[![Initial ADMIN Menu](https://i.postimg.cc/qRcCNkqT/home-ADMIN.png)](https://postimg.cc/JDnhgCj6)
 
-### Menú de Administración de Productos
+### Product Management Menu
 
-[![Menú de Administración de Productos](https://i.postimg.cc/L4T1R6Gk/products.png)](https://postimg.cc/ThKwJGdh)
+[![Product Management Menu](https://i.postimg.cc/L4T1R6Gk/products.png)](https://postimg.cc/ThKwJGdh)
 
-### Menú para Agregar un Nuevo Producto
+### Menu for Adding a New Product
 
-[![Menú para Agregar un Nuevo Producto](https://i.postimg.cc/tCqFVVFm/add-Product.png)](https://postimg.cc/z3Qysvtn)
+[![Menu for Adding a New Product](https://i.postimg.cc/tCqFVVFm/add-Product.png)](https://postimg.cc/z3Qysvtn)
 
-### Menú para Editar un Producto
+### Menu for Editing a Product
 
-[![Menú para Editar un Producto](https://i.postimg.cc/y8W9L4Qm/edit-Product.png)](https://postimg.cc/TKMpPSX1)
+[![Menu for Editing a Product](https://i.postimg.cc/y8W9L4Qm/edit-Product.png)](https://postimg.cc/TKMpPSX1)
 
-## Licencia:
+## License
 
-Este proyecto está licenciado bajo [Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional](http://creativecommons.org/licenses/by-nc-sa/4.0/):
+This project is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
   <img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
