@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tecsup</groupId>
-	<artifactId>ferreteria</artifactId>
+	<artifactId>SpringBoot_Thymeleaf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringSecurity</name>
 	<description>Demo project for Spring Boot</description>

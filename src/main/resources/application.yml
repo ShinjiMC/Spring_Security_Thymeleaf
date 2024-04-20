@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://roundhouse.proxy.rlwy.net:20718/railway
-    username: root
-    password: -3GG32AbhbCc56Hgf4cbAb-35BCcC3b4
+    url: jdbc:mysql://b65cxs6ckakvqtwwvqtm-mysql.services.clever-cloud.com:3306/b65cxs6ckakvqtwwvqtm
+    username: u8uf502vabmyrodd
+    password: UWcvkl04mQAika9lIAR4
   jpa:
     hibernate:
       ddl-auto: update
