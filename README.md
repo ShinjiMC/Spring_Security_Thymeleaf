@@ -1,5 +1,14 @@
 # Spring_Security_Thymeleaf
 
+[![Deploy Docker](https://github.com/ShinjiMC/Spring_Security_Thymeleaf/actions/workflows/docker.yml/badge.svg)](https://github.com/ShinjiMC/Spring_Security_Thymeleaf/actions/workflows/docker.yml)
+
+![Java](https://img.shields.io/badge/Java-D54E4C?style=for-the-badge&logo=openjdk&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-343434?style=for-the-badge&logo=mysql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-005571?style=for-the-badge&logo=Docker&logoColor=white)
+![Render](https://img.shields.io/badge/Render-2800ff?style=for-the-badge&logo=render&logoColor=white)
+
 By Braulio Maldonado Casilla & Sergio Daniel Mogollon Caceres
 
 The project simulates the process of generating invoices for a hardware store. When users log in (or create an account), they are assigned different roles according to their position in the company. Standard employees can generate invoices by selecting products and their respective quantities, which culminates in the automatic creation of a PDF file ready for printing.
